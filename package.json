@@ -1,0 +1,70 @@
+{
+	"name": "markdown-linker",
+	"displayName": "markdown linker",
+	"publisher": "bkc",
+	"description": "url to markdown link with fetch title.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.54.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.showURL",
+		"onCommand:extension.replaceURL"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.showURL",
+				"title": "show URL"
+			},
+			{
+				"command": "extension.replaceURL",
+				"title": "replace URL"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.showURL",
+				"key": "ctrl+s",
+				"mac": "cmd+s",
+				"when": "editorHasSelection && resourceLangId == markdown"
+			},
+			{
+				"command": "extension.replaceURL",
+				"key": "ctrl+r",
+				"mac": "cmd+r",
+				"when": "editorHasSelection && resourceLangId == markdown"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/axios": "^0.14.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.54.0",
+		"@typescript-eslint/eslint-plugin": "^4.14.1",
+		"@typescript-eslint/parser": "^4.14.1",
+		"eslint": "^7.19.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.2.1",
+		"typescript": "^4.1.3",
+		"vscode-test": "^1.5.0"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"jsdom": "^16.5.1"
+	}
+}
