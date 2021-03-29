@@ -30,7 +30,7 @@ export function generateSnippet(titles: string[], url:string):SnippetString {
     const snippets = new SnippetString(`[`);
     const choice:string[] = [];
     titles.map(title => {
-        // パイプラインが入ると選択肢が文字列になる
+        // パイプラインが入ると選択肢が文字列になるので"-"に置換
         const rep = title.replace("|", "-");
         choice.push(rep);
     });
