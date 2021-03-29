@@ -1,4 +1,4 @@
-import { window, TextEditor, TextDocument, Selection} from "vscode";
+import { window, TextEditor, TextDocument, Selection, SnippetString} from "vscode";
 
 export function getActiveEditor(): TextEditor | null {
     const editor = window.activeTextEditor;
@@ -20,4 +20,21 @@ export function getSelectURL(doc: TextDocument, selection: Selection):string | n
     }
     selectURL = temp;
     return selectURL;
+}
+
+/**
+ * [ページタイトル - ホームページタイトル,ページタイトル,ホームページタイトル]  
+ * の選択肢を含むスニペットを返す
+ */
+export function generateSnippet(titles: string[], url:string):SnippetString {
+    const snippets = new SnippetString(`[`);
+    const choice:string[] = [];
+    titles.map(title => {
+        // パイプラインが入ると選択肢が文字列になる
+        const rep = title.replace("|", "-");
+        choice.push(rep);
+    });
+    snippets.appendChoice(choice);
+    snippets.appendText(`](${ url })`);
+    return snippets;
 }

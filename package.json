@@ -2,6 +2,7 @@
 	"name": "markdown-linker",
 	"displayName": "markdown linker",
 	"publisher": "bkc",
+	"repository": "https://github.com/bkc-tomi/markdown-linker",
 	"description": "url to markdown link with fetch title.",
 	"version": "0.0.1",
 	"engines": {

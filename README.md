@@ -14,7 +14,13 @@ Initial release of ...
 
 ### 1.0.1
 
-Fixed issue #.
+add snippet.
+
+choice  
+1. "page title - homepage title"  
+2. "page title"  
+3. "homepage title"  
+
 
 ### 1.1.0
 

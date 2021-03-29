@@ -78,7 +78,7 @@ export async function getTitle(link: string) {
 
     // ページタイトル取得失敗 ====================================================
     if (page === null && homepage === null) {
-        return "ページ情報が取得出来ませんでした。";
+        return ["ページ情報が取得出来ませんでした。"];
     }
 
     // タイトル取得 =============================================================
@@ -101,7 +101,7 @@ export async function getTitle(link: string) {
     title = pageTitle ? pageTitle : "";
     title = homepageTitle ? `${ title } | ${ homepageTitle }` : title;
     if (title === "") {
-        return "タイトル情報が取得出来ませんでした。";
+        return ["タイトル情報が取得出来ませんでした。"];
     }
-    return title;
+    return [title, pageTitle, homepageTitle];
 }

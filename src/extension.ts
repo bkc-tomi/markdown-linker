@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getActiveEditor, getSelectURL } from "./utils/vscodes";
+import { getActiveEditor, getSelectURL, generateSnippet } from "./utils/vscodes";
 import { getTitle } from "./utils/communication";
 
 export function activate(context: vscode.ExtensionContext) {
@@ -42,15 +42,18 @@ class LinkController {
 		if (url === null) return;
 
 		// リンク情報の取得 ================================================================
-		const title = await getTitle(url);
+		const titles = await getTitle(url);
 
-		// 置換文字列生成 =================================================================
-		const newText = `[${ title }](${ url })`
-
-		// URLの置換 =====================================================================
-		editor.edit(edit => {
-			edit.replace(selection, newText);
-		})
+		// スニペットの作成 ================================================================
+		if (titles.length === 1) {
+			// エラー処理
+			vscode.window.showInformationMessage(titles[0]);
+			return;
+		}
+		const snippets = generateSnippet(titles, url);
+		
+		// スニペットの適用
+		editor.insertSnippet(snippets);
 	}
 
 	public async showURL() {
@@ -70,7 +73,7 @@ class LinkController {
 		const title = await getTitle(url);
 		
 		// 取得したサイト情報の表示 =========================================================
-		vscode.window.showInformationMessage(title);
+		// vscode.window.showInformationMessage();
 	}
 
 	dispose() {
